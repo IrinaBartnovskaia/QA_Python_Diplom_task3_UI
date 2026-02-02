@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# PyCharm
+.idea/
+*.iml
+
+# Pytest
+.pytest_cache/
+.coverage
+
+# Allure
+reports/allure-results/
+
+# OS
+.DS_Store
+Thumbs.db
