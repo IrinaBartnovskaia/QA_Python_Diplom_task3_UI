@@ -1,20 +1,13 @@
-# Python
-__pycache__/
-*.py[cod]
 .venv/
 venv/
-
-# PyCharm
+__pycache__/
+*.py[cod]
 .idea/
-
-# pytest
 .pytest_cache/
-
-# Allure
 reports/allure-results/
 reports/allure-report/
-
-# OS
+*.log
 .DS_Store
 Thumbs.db
+
 
