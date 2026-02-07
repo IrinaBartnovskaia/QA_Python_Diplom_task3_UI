@@ -1,13 +1,6 @@
-.venv/
-venv/
-__pycache__/
-*.py[cod]
 .idea/
+.venv/
+__pycache__/
+.env
 .pytest_cache/
-reports/allure-results/
-reports/allure-report/
-*.log
-.DS_Store
-Thumbs.db
-
-
+.coverage
