@@ -1,0 +1,16 @@
+      # venv
+.venv/
+venv/
+
+# caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# PyCharm
+.idea/
+
+# Allure / reports (если не нужно коммитить)
+allure-results/
+allure-report/
+reports/
