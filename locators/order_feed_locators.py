@@ -4,17 +4,15 @@ from selenium.webdriver.common.by import By
 class OrderFeedLocators:
     ORDERS_LIST = (By.XPATH, "//ul[contains(@class,'OrderFeed_list')]")
 
-    TOTAL_ORDERS = (
+    COUNTER_TOTAL = (
         By.XPATH,
-        "//p[text()='Выполнено за все время:']/following-sibling::p"
+        "//p[contains(.,'Выполнено за') and contains(.,'все')]/following-sibling::p"
     )
 
-    TODAY_ORDERS = (
+    COUNTER_TODAY = (
         By.XPATH,
-        "//p[text()='Выполнено за сегодня:']/following-sibling::p"
+        "//p[contains(.,'Выполнено за сегодня')]/following-sibling::p"
     )
 
-    IN_PROGRESS_ORDERS = (
-        By.XPATH,
-        "//ul[contains(@class,'OrderFeed_orderListReady')]"
-    )
+    IN_WORK_LIST = (By.XPATH, "//p[contains(.,'В работе')]/following-sibling::ul")
+    IN_WORK_NUMBERS = (By.XPATH, "//p[contains(.,'В работе')]/following-sibling::ul//li")
