@@ -1,0 +1,75 @@
+# ======================
+# Python
+# ======================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# ======================
+# Pytest
+# ======================
+.pytest_cache/
+.cache/
+
+# ======================
+# Allure
+# ======================
+allure_results/
+allure_report/
+
+# ======================
+# Selenium / browsers
+# ======================
+*.log
+
+# ======================
+# IDEs
+# ======================
+# PyCharm
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# ======================
+# OS files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# Coverage / reports
+# ======================
+htmlcov/
+.coverage
+coverage.xml
+
+# ======================
+# Temporary / debug
+# ======================
+*.tmp
+*.swp
+*.bak
+
+# ======================
+# Node (на всякий случай, если кто-то запускал)
+# ======================
+node_modules/
+
+# ======================
+# Environment variables
+# ======================
+.env
