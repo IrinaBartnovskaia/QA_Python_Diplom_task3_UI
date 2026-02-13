@@ -1,5 +1,4 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.base_page import BasePage
 from locators.order_feed_locators import OrderFeedLocators
@@ -20,9 +19,13 @@ class OrdersFeedPage(BasePage):
     def wait_for_orders_in_progress(self):
         self.wait_for_element_visible(OrderFeedLocators.IN_WORK_LIST, timeout=20)
 
-    @allure.step("Получить первый номер заказа из блока 'В работе'")
-    def get_number_orders_in_progress(self):
+    @allure.step("Получить ВСЕ номера заказов из блока 'В работе'")
+    def get_numbers_orders_in_progress(self):
         self.wait_for_orders_in_progress()
         items = self.driver.find_elements(*OrderFeedLocators.IN_WORK_NUMBERS)
-        numbers = [i.text.strip() for i in items if i.text.strip()]
-        return numbers[0] if numbers else ""
+        numbers = []
+        for i in items:
+            t = i.text.strip()
+            if t.isdigit():
+                numbers.append(int(t))  # int сам уберёт ведущие нули
+        return numbers

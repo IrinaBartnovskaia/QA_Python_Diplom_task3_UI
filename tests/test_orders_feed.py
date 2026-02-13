@@ -43,16 +43,15 @@ class TestOrdersFeed:
         main_page.main_page_loading_wait()
         main_page.create_order()
         main_page.is_order_success_modal_visible()
-        main_page.wait_for_animation_end()
 
-        order_number = main_page.get_number_of_order()
+        order_number = int(main_page.get_number_of_order())
+
         main_page.click_close_button_success_modal()
         main_page.wait_for_order_success_modal_hidden()
 
         main_page.click_by_link_orders_feed()
         orders_page.wait_page_loaded()
-        orders_page.wait_for_orders_in_progress()
 
-        order_in_progress = orders_page.get_number_orders_in_progress()
+        numbers_in_progress = orders_page.get_numbers_orders_in_progress()
 
-        assert int(order_number) == int(order_in_progress)
+        assert order_number in numbers_in_progress

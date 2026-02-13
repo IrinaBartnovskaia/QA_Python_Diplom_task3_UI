@@ -1,5 +1,5 @@
 import allure
-
+from selenium.common.exceptions import ElementClickInterceptedException, StaleElementReferenceException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from seletools.actions import drag_and_drop
@@ -35,10 +35,36 @@ class BasePage:
             EC.invisibility_of_element_located(locator)
         )
 
+    # алиас (в твоих файлах местами используется это имя)
+    def wait_for_element_invisible(self, locator, timeout=10):
+        return self.wait_for_element_hide(locator, timeout)
+
     @allure.step("Кликнуть на элемент")
     def click_on_element(self, locator, timeout=20):
         element = self.wait_for_element_clickable(locator, timeout)
         element.click()
+
+    @allure.step("Кликнуть на элемент (с повтором, если перехватывает оверлей)")
+    def safe_click(self, locator, overlay_locator=None, timeout=20):
+
+        try:
+            self.click_on_element(locator, timeout=timeout)
+            return
+        except ElementClickInterceptedException:
+            if overlay_locator is not None:
+                try:
+                    self.wait_for_element_hide(overlay_locator, timeout=10)
+                except Exception:
+                    pass
+
+
+        try:
+            self.click_on_element(locator, timeout=timeout)
+            return
+        except (ElementClickInterceptedException, StaleElementReferenceException):
+            # принудительный клик
+            element = self.wait_for_element_visible(locator, timeout=timeout)
+            self.driver.execute_script("arguments[0].click();", element)
 
     @allure.step("Получить текст элемента")
     def get_text_of_element(self, locator, timeout=20):
@@ -61,5 +87,5 @@ class BasePage:
     @allure.step("Подождать, что текст элемента изменится")
     def wait_for_text_changed(self, locator, old_text: str, timeout=10):
         WebDriverWait(self.driver, timeout).until(
-            lambda d: self.wait_for_element_visible(locator).text != old_text
+            lambda d: d.find_element(*locator).text.strip() != str(old_text).strip()
         )
